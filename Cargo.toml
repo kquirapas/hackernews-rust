@@ -1,0 +1,5 @@
+[workspace]
+resolver = "2"
+members = [ "account", "app", "comment", "event", "frontend", "gateway", "persistence", "post"]
+
+[workspace.dependencies]
