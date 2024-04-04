@@ -1,1 +1,1 @@
-/Users/kquirapas/kquirapas/projects/rust/hackernews/target/debug/app: /Users/kquirapas/kquirapas/projects/rust/hackernews/app/src/main.rs
+/Users/kquirapas/kquirapas/projects/rust/hackernews/target/debug/app: /Users/kquirapas/kquirapas/projects/rust/hackernews/app/src/main.rs /Users/kquirapas/kquirapas/projects/rust/hackernews/frontend/src/lib.rs /Users/kquirapas/kquirapas/projects/rust/hackernews/frontend/templates/base.html /Users/kquirapas/kquirapas/projects/rust/hackernews/frontend/templates/index.html
