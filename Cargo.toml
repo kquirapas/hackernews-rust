@@ -6,6 +6,7 @@ members = [ "account", "client", "comment", "event", "frontend", "gateway", "per
 anyhow = "1.0.81"
 askama = "0.12.1"
 axum = "0.7.5"
+serde = { version = "1.0.197", features = ["derive"] }
 tokio = { version = "1.37.0", features = ["full"] }
 tower = "0.4.13"
 tower-http = { version = "0.5.2", features = ["fs"] }
