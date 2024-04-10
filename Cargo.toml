@@ -1,6 +1,7 @@
 [workspace]
 resolver = "2"
-members = [ "account", "app", "comment", "event", "frontend", "gateway", "persistence", "post"]
+members = [ "account", "client", "comment", "event", "frontend", "gateway", "persistence", "post"]
+default-members = ["client"]
 
 [workspace.dependencies]
 anyhow = "1.0.81"
