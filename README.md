@@ -1,5 +1,8 @@
 # Software Architecture Case Study with Rust
 
+# Architecture Diagram
+[From Draw.io](https://drive.google.com/file/d/1WBCnk8QiiBw8mf0VkOgjS3oYCYN40CXI/view?usp=drive_link)
+
 # Workspace Structure
 
 ## Phase 1: 1 Binary
@@ -8,7 +11,7 @@
 
 ```
 /root
-    /app (binary to deploy for initial phase of coupled code)
+    /client(binary to deploy for initial phase of coupled code)
         main.rs
     /frontend
         lib.rs
