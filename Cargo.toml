@@ -1,7 +1,6 @@
 [workspace]
 resolver = "2"
 members = [ "account", "client", "comment", "event", "frontend", "gateway", "persistence", "post"]
-default-members = ["client"]
 
 [workspace.dependencies]
 anyhow = "1.0.81"
@@ -10,3 +9,4 @@ axum = "0.7.5"
 tokio = { version = "1.37.0", features = ["full"] }
 tower = "0.4.13"
 tower-http = { version = "0.5.2", features = ["fs"] }
+thiserror = "1.0.58"
