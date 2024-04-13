@@ -1,7 +1,20 @@
 # Software Architecture Case Study with Rust
 
+# Technical (Product) Documentation
+
+[From Google Docs](https://docs.google.com/document/d/1XhoqWgHti_WArzu7oZJjJcr9yvebNP1C7r42s5Y0vyM/edit?usp=sharing)
+
+This includes the Product Requirements documentation as well.
+
+
 # Architecture Diagram
+
 [From Draw.io](https://drive.google.com/file/d/1WBCnk8QiiBw8mf0VkOgjS3oYCYN40CXI/view?usp=drive_link)
+
+# Persistence Schematic Diagram
+
+[From Draw.io](https://drive.google.com/file/d/175X2peGS7EG9vrILSeNTbOD_UySyv49K/view?usp=drive_link)
+
 
 # Workspace Structure
 
@@ -78,13 +91,42 @@ Utilizing the [[bin]] manifest option to compile each library into a service
         lib.rs
 ```
 
-# Skill Objectives
-1. Fullstack
-2. Docker
-3. Kubernetes
-4. Grafana / Prometheus
+# Roadmap
 
-# Software Architecture Objectives
+- Database Schemas
+- Persistency Library
+- Gateway Service
+- Account Service
+- Post Service
+- Comment Service
+- Event Bus
+
+# Key Objectives
+
+1. Language Objectives
+2. Technology Objectives
+3. Software Architecture Objectives
+
+## Language Objectives
+
+1. Rust for Web
+2. Rust for Distributed and Scalable Systems
+3. Async Rust
+4. Monolithic Rust
+5. Clean Rust (Locality of Behavior)
+
+## Skill Objectives
+
+1. Containerization with Docker 
+2. Orchestration with Kubernetes
+3. Deployment and Management with AWS / GCP
+4. Instrumentation with Grafana / Prometheus
+5. Event Driven with Kafka
+6. CI/CD with Github Actions
+7. Database Management with Postgres and SQLite
+
+## Software Architecture Objectives
+
 1. Scalable (Decoupled)
 2. Event-Driven Architecture
 3. Hexagonal / Ports and Adapters Architecture (App Layer)
