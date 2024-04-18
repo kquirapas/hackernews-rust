@@ -18,7 +18,7 @@ struct IndexTemplate<'a> {
 
 pub async fn run() -> anyhow::Result<()> {
     // build our application with a single route
-    let local_path = std::env::current_dir().unwrap();
+    let local_path = std::env::current_dir()?;
     let assets_path = local_path.join(Path::new("frontend/assets"));
     let app = Router::new()
         // add a
@@ -29,7 +29,7 @@ pub async fn run() -> anyhow::Result<()> {
     let port = 3000;
     let addr = std::net::SocketAddr::from(([0, 0, 0, 0], port));
 
-    let listener = tokio::net::TcpListener::bind(addr).await.unwrap();
+    let listener = tokio::net::TcpListener::bind(addr).await?;
     axum::serve(listener, app)
         .await
         .context("Error while starting server")?;
@@ -62,14 +62,3 @@ where
         }
     }
 }
-
-// #[cfg(test)]
-// mod tests {
-//     use super::*;
-//
-//     #[test]
-//     fn it_works() {
-//         let result = add(2, 2);
-//         assert_eq!(result, 4);
-//     }
-// }

@@ -1,4 +1,5 @@
 use anyhow::{ensure, Context, Error, Result};
+use async_trait::async_trait;
 use sqlx::{
     postgres::{PgPool, PgPoolOptions, Postgres},
     Transaction,
@@ -29,6 +30,7 @@ impl PostgresPersistence<'_> {
 
 impl AccountsPersistence for PostgresPersistence<'_> {}
 
+#[async_trait]
 impl Connection for PostgresPersistence<'_> {
     async fn query(&self) -> Result<()> {
         // sqlx::query!(
@@ -98,11 +100,23 @@ impl Connection for PostgresPersistence<'_> {
     }
 }
 
+#[async_trait]
 impl AccountsActions for PostgresPersistence<'_> {
-    async fn create_account() {}
-    async fn read_account() {}
-    async fn update_account() {}
-    async fn delete_account() {}
+    async fn create_account(&self) -> Result<()> {
+        Ok(())
+    }
+
+    async fn read_account(&self) -> Result<()> {
+        Ok(())
+    }
+
+    async fn update_account(&self) -> Result<()> {
+        Ok(())
+    }
+
+    async fn delete_account(&self) -> Result<()> {
+        Ok(())
+    }
 }
 
 #[cfg(test)]
@@ -140,5 +154,25 @@ mod tests {
             err_type,
             ConnectionError::TransactionAlreadyRunning
         ));
+    }
+
+    #[tokio::test]
+    async fn test_transaction_commit() {
+        let mut db = PostgresPersistence::new().await.unwrap();
+        assert!(db.transaction_start().await.is_ok());
+        // insert query
+        assert!(db.transaction_commit().await.is_ok());
+
+        // check that the query came through
+    }
+
+    #[tokio::test]
+    async fn test_transaction_rollback() {
+        let mut db = PostgresPersistence::new().await.unwrap();
+        assert!(db.transaction_start().await.is_ok());
+        // insert query
+        assert!(db.transaction_rollback().await.is_ok());
+
+        // check that the query didn't come through
     }
 }
