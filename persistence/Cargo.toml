@@ -6,6 +6,10 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+anyhow = { workspace = true }
+tokio = { workspace = true }
+thiserror = { workspace = true }
+sqlx = { version = "0.7.4", features = ["postgres", "sqlite", "runtime-tokio"] }
 
 [[bin]]
 name = "persistence"

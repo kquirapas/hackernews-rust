@@ -23,7 +23,7 @@ create table startups (
 
 create table posts (
 	id uuid default gen_random_uuid(),
-	content varchar(8000),
+	content text,
 	created_by uuid,
 	created_at timestamp not null default current_timestamp,
 	primary key (id),
@@ -32,7 +32,7 @@ create table posts (
 
 create table comments (
 	id uuid default gen_random_uuid(),
-	content varchar(8000),
+	content text,
 	created_by uuid,
 	created_at timestamp not null default current_timestamp,
 	primary key (id),
@@ -44,7 +44,6 @@ create table post_upvotes (
 	id uuid default gen_random_uuid(),
 	created_by uuid,
 	for_post uuid,
-	content varchar(8000),
 	created_at timestamp not null default current_timestamp,
 	primary key (created_by, for_post),
 	foreign key (created_by) references accounts(id),
@@ -55,7 +54,6 @@ create table comment_upvotes(
 	id uuid default gen_random_uuid(),
 	created_by uuid,
 	for_comment uuid,
-	content varchar(8000),
 	created_at timestamp not null default current_timestamp,
 	primary key (created_by, for_comment),
 	foreign key (created_by) references accounts(id),
