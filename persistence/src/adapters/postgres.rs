@@ -125,15 +125,20 @@ mod tests {
     #[tokio::test]
     async fn test_failure_transaction_already_running() {
         let mut db = PostgresPersistence::new().await.unwrap();
+
+        // make sure creation of transaction was a success
         assert!(db.transaction_start().await.is_ok());
-        let ret = db.transaction_start().await;
-        let err = ret.unwrap_err();
+
+        // purposely invoke the error by starting 2nd time
+        let ret = db.transaction_start().await.unwrap_err();
+
         // convert Error to a concrete type by downcasting
-        let err_type = err.downcast::<ConnectionError>().unwrap();
+        let err_type = ret.downcast::<ConnectionError>().unwrap();
+
         // make sure it's the expected error type
-        assert!(match err_type {
-            ConnectionError::TransactionAlreadyRunning => true,
-            _ => false,
-        });
+        assert!(matches!(
+            err_type,
+            ConnectionError::TransactionAlreadyRunning
+        ));
     }
 }
