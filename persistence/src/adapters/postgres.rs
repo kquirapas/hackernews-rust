@@ -32,19 +32,6 @@ impl AccountsPersistence for PostgresPersistence<'_> {}
 
 #[async_trait]
 impl Connection for PostgresPersistence<'_> {
-    async fn query(&self) -> Result<()> {
-        // sqlx::query!(
-        //     "INSERT INTO book (title, author, isbn) VALUES ($1, $2, $3)",
-        //     &book.title,
-        //     &book.author,
-        //     &book.isbn
-        // )
-        // .execute(&mut *transaction)
-        // .await
-        // .with_context(|| "Failed to create book")?;
-        Ok(())
-    }
-
     async fn transaction_start(&mut self) -> Result<()> {
         let shared_tx_ref = Arc::clone(&self.transaction);
 
@@ -103,6 +90,20 @@ impl Connection for PostgresPersistence<'_> {
 #[async_trait]
 impl AccountsActions for PostgresPersistence<'_> {
     async fn create_account(&self) -> Result<()> {
+        self.transaction_start().await?;
+
+        sqlx::query!(
+            "INSERT INTO accounts (name, author, isbn) VALUES ($1, $2, $3)",
+            &book.title,
+            &book.author,
+            &book.isbn
+        )
+        .execute(&mut *self.transaction)
+        .await
+        .with_context(|| "Failed to create book")?;
+
+        self.transaction_commit().await?;
+
         Ok(())
     }
 

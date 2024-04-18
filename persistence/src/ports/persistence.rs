@@ -7,7 +7,6 @@ use async_trait::async_trait;
 
 #[async_trait]
 pub trait Connection {
-    async fn query(&self) -> Result<()>;
     async fn transaction_start(&mut self) -> Result<()>;
     async fn transaction_commit(&self) -> Result<()>;
     async fn transaction_rollback(&mut self) -> Result<()>;
