@@ -1,4 +1,4 @@
-//! Persistence Adapters for Hexagonal /
+//! Request Adapters for Hexagonal /
 //! Ports and Adapters Architecture
 use anyhow::Result;
 use async_trait::async_trait;

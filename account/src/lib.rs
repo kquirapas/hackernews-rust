@@ -1,14 +1,10 @@
-pub fn add(left: usize, right: usize) -> usize {
-    left + right
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
-    }
-}
+use axum::{
+    body::Body,
+    extract::{ConnectInfo, DefaultBodyLimit, Path, Query, State},
+    http::{header::CONTENT_TYPE, Method, Request, StatusCode},
+    middleware,
+    middleware::Next,
+    response::Response,
+    routing::{get, post},
+    Json,
+};

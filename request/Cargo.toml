@@ -1,5 +1,5 @@
 [package]
-name = "account"
+name = "request"
 version = "0.1.0"
 edition = "2021"
 
@@ -8,15 +8,5 @@ edition = "2021"
 [dependencies]
 anyhow= { workspace = true }
 axum = { workspace = true }
-persistence = { version = "0.1.0", path = "../persistence" }
-request = { version = "0.1.0", path = "../request" }
 thiserror = { workspace = true }
 tokio = { workspace = true }
-
-[lib]
-name = "account"
-path = "src/lib.rs"
-
-[[bin]]
-name = "account"
-path = "bin/main.rs"

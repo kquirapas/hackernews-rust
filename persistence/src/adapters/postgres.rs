@@ -8,7 +8,7 @@ use std::ops::DerefMut;
 use std::sync::{Arc, Mutex};
 
 use crate::errors::ConnectionError;
-use crate::ports::persistence::{AccountsActions, AccountsPersistence, Connection};
+use crate::ports::persistence::{Connection, Persistence};
 
 pub struct PostgresPersistence<'a> {
     pub pool: PgPool,
@@ -28,14 +28,13 @@ impl PostgresPersistence<'_> {
     }
 }
 
-impl AccountsPersistence for PostgresPersistence<'_> {}
+impl Persistence for PostgresPersistence<'_> {}
 
 #[async_trait]
 impl Connection for PostgresPersistence<'_> {
     async fn transaction_start(&mut self) -> Result<()> {
         let shared_tx_ref = Arc::clone(&self.transaction);
 
-        println!("before self.transaction: {:?}", self.transaction);
         let new_tx = self.pool.begin().await?;
 
         // limit lock acquisition in block scope
@@ -83,39 +82,6 @@ impl Connection for PostgresPersistence<'_> {
             tx.rollback().await?;
         }
 
-        Ok(())
-    }
-}
-
-#[async_trait]
-impl AccountsActions for PostgresPersistence<'_> {
-    async fn create_account(&self) -> Result<()> {
-        self.transaction_start().await?;
-
-        sqlx::query!(
-            "INSERT INTO accounts (name, author, isbn) VALUES ($1, $2, $3)",
-            &book.title,
-            &book.author,
-            &book.isbn
-        )
-        .execute(&mut *self.transaction)
-        .await
-        .with_context(|| "Failed to create book")?;
-
-        self.transaction_commit().await?;
-
-        Ok(())
-    }
-
-    async fn read_account(&self) -> Result<()> {
-        Ok(())
-    }
-
-    async fn update_account(&self) -> Result<()> {
-        Ok(())
-    }
-
-    async fn delete_account(&self) -> Result<()> {
         Ok(())
     }
 }
